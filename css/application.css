@@ -31,13 +31,13 @@ body {
 .obstacle-small {
   height: 20px;
   width: 20px;
-  right: 50px;
+  left: 500px;
 }
 
 .obstacle-large {
   height: 50px;
   width: 50px;
-  right: 80px;
+  left: 600px;
 }
 
 
@@ -47,6 +47,10 @@ body {
 
 .jump {
   bottom: 30px;
+}
+
+.high-jump {
+  bottom: 50px;
 }
 
 
