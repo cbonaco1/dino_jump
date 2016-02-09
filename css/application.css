@@ -1,0 +1,63 @@
+html, body, h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  font: inherit;
+  font-size: inherit;
+  font-style: inherit;
+}
+
+body {
+  text-align: center;
+}
+
+#dino {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: blue;
+  bottom: 0;
+  transition: bottom 1s;
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  background: red;
+  transition: left 10s;
+}
+
+.obstacle-small {
+  height: 20px;
+  width: 20px;
+  right: 50px;
+}
+
+.obstacle-large {
+  height: 50px;
+  width: 50px;
+  right: 80px;
+}
+
+
+.obstacle:hover {
+  left: 0;
+}
+
+.jump {
+  bottom: 30px;
+}
+
+
+.game-field {
+  position: relative;
+  border: 1px solid black;
+  width: 1000px;
+  height: 400px;
+  margin: 25px auto;
+  padding: 10px;
+
+  /*padding-top: 50px;
+  padding-bottom: 10px;*/
+}
