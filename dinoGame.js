@@ -2,6 +2,9 @@ var Game = require('./javascript/game');
 var Dino = require('./javascript/dino');
 var Obstacle = require('./javascript/obstacle');
 
+  //TODO Get difficulty from user, then pass this into Game object
+  //this represents the speed at which the obstalces will come out
+
 $(document).ready(function() {
   var game = new Game();
   var dinoElement = document.getElementById("dino");
@@ -15,17 +18,6 @@ $(document).ready(function() {
       if (!game.started) {
         game.start();
 
-        this.obstalceInterval = window.setInterval(function(){
-          var obstacle = new Obstacle(game);
-          //append obstacle to game-field
-          // debugger
-          gameField.appendChild(obstacle.domElement);
-
-          window.setTimeout(function() {
-            obstacle.slide();
-          }.bind(this), 10);
-
-        }.bind(this), 1000);
 
 
       }

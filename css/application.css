@@ -10,6 +10,11 @@ html, body, h2 {
 
 body {
   text-align: center;
+  background: #7FB73A;
+}
+
+h2 {
+  font-size: 24px;
 }
 
 #dino {
@@ -18,25 +23,17 @@ body {
   height: 100px;
   background: blue;
   bottom: 0;
+  left: 225px;
   transition: bottom 0.5s, height 0s;
-  /*transition-timing-function: linear;*/
 }
 
 .obstacle {
   position: absolute;
   bottom: 0;
-  /*right: 0;*/
   left: 1000px;
   background: red;
   transition: left 5s;
-}
-
-.obstacle-active {
-  left: 0;
-}
-
-.obstacle:hover {
-  left: 0;
+  transition-timing-function: linear;
 }
 
 .jump {
@@ -50,14 +47,13 @@ body {
 
 #game-field {
   position: relative;
-  border: 1px solid black;
+  color: #fff;
+  border: 1px solid #4CAF50;
   width: 1000px;
   height: 400px;
   margin: 25px auto;
   padding: 10px;
-
-  /*padding-top: 50px;
-  padding-bottom: 10px;*/
+  background-image: url('./../images/background.jpg');
 }
 
 .score-window {
