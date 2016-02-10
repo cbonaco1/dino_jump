@@ -75,6 +75,7 @@ Game.prototype.checkCollision = function () {
     var dinoHeight = $(this.dino).outerHeight(true);
     var dinoWidth = $(this.dino).outerWidth(true);
     var totalDinoHeight = dinoTop + dinoHeight;
+    var totalDinoWidth = dinoLeft + dinoWidth;
     // console.log(h + ", " + w);
 
     var obsLeft = $(obstacle).offset().left;
@@ -82,6 +83,7 @@ Game.prototype.checkCollision = function () {
     var obsHeight = $(obstacle).outerHeight(true);
     var obsWidth = $(obstacle).outerWidth(true);
     var totalObsHeight = obsHeight + obsTop;
+    var totalObsWidth = obsLeft + obsWidth;
 
     //if dino touches the obstacle from the top (squishes obstacle)
     var heightClearance = (totalDinoHeight >= totalObsHeight);
@@ -90,20 +92,21 @@ Game.prototype.checkCollision = function () {
     var touching = obsLeft == (dinoLeft + dinoWidth);
 
     if ( heightClearance && touching){
-      this.stop();
+      // this.stop();
     }
 
-    if (heightClearance) {
-      console.log("Height clearance true");
-      if (touching) {
-        console.log("Toching true");
-        this.stop();
-      }
+    if ( (totalDinoHeight < obsTop) ||
+          (dinoTop > totalObsHeight) ||
+          (totalDinoWidth < obsLeft) ||
+          (dinoLeft > totalObsWidth)) {
 
     }
     else {
-
+      this.stop();
     }
+
+
+
 
     //tests height
     // if (totalDinoHeight >= totalObsHeight) {

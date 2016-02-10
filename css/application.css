@@ -25,11 +25,11 @@ h2 {
   position: absolute;
   width: 100px;
   height: 100px;
-  background: blue;
+  /*background: blue;*/
   bottom: 0;
   left: 250px;
-  /*background: url('./../images/dino1.png');
-  background-size: cover;*/
+  background: url('./../images/dino1.png');
+  background-size: cover;
   transition: bottom 0.5s, height 0s;
 }
 
