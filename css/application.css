@@ -18,28 +18,22 @@ body {
   height: 100px;
   background: blue;
   bottom: 0;
-  transition: bottom 1s;
+  transition: bottom 0.5s, height 0s;
+  /*transition-timing-function: linear;*/
 }
 
 .obstacle {
   position: absolute;
   bottom: 0;
+  /*right: 0;*/
+  left: 1000px;
   background: red;
-  transition: left 10s;
+  transition: left 5s;
 }
 
-.obstacle-small {
-  height: 20px;
-  width: 20px;
-  left: 500px;
+.obstacle-active {
+  left: 0;
 }
-
-.obstacle-large {
-  height: 50px;
-  width: 50px;
-  left: 600px;
-}
-
 
 .obstacle:hover {
   left: 0;
@@ -54,7 +48,7 @@ body {
 }
 
 
-.game-field {
+#game-field {
   position: relative;
   border: 1px solid black;
   width: 1000px;
