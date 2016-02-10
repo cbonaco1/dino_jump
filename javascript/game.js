@@ -12,6 +12,8 @@ var Game = function() {
 }
 
 Game.prototype.start = function () {
+  $("#welcome-message").hide();
+  $("#scoreboard").hide();
   this.started = true;
   this.timeInterval = window.setInterval(this.incrementScore.bind(this), 50);
   this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
@@ -35,6 +37,9 @@ Game.prototype.start = function () {
 };
 
 Game.prototype.stop = function () {
+  var finalScore = document.getElementById("final-score");
+  finalScore.innerHTML = this.score;
+  $("#scoreboard").show();
   window.clearInterval(this.timeInterval);
   window.clearInterval(this.collisionInterval);
   window.clearInterval(this.obstacleInterval);
@@ -78,26 +83,32 @@ Game.prototype.checkCollision = function () {
     var obsWidth = $(obstacle).outerWidth(true);
     var totalObsHeight = obsHeight + obsTop;
 
+    //if dino touches the obstacle from the top (squishes obstacle)
     var heightClearance = (totalDinoHeight >= totalObsHeight);
-    // var touching = ((obsLeft - obsWidth) <= dinoLeft);
 
     //horizontal
-    var touching = obsLeft <= (dinoLeft + dinoWidth);
+    var touching = obsLeft == (dinoLeft + dinoWidth);
 
-    if (  heightClearance && touching ){
+    if ( heightClearance && touching){
       this.stop();
-      debugger
+    }
+
+    if (heightClearance) {
+      console.log("Height clearance true");
+      if (touching) {
+        console.log("Toching true");
+        this.stop();
+      }
+
+    }
+    else {
+
     }
 
     //tests height
     // if (totalDinoHeight >= totalObsHeight) {
     //   // debugger
     // }
-    else {
-      console.log("---not colliding---");
-    }
-
-
   }
 
   //check collision with first item in obstacle queue

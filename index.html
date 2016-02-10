@@ -2,16 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Dino Game</title>
+    <title>DinoJump</title>
     <link rel="stylesheet" href="./css/application.css" charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="./javascript/bundle.js"></script>
   </head>
   <body>
-    <h2>Welcome to DinoJump!</h2>
-
-
     <div id="game-field">
+      <div id="welcome-message" class="message-window">
+        <h3 class="welcome-header">Welcome to DinoJump!</h3>
+        <p>The object of the game is to avoid the obstalces</p>
+        <p>Use the spacebar to make the dinosaur jump over the obstacles</p>
+        <p>Press the down key to make the dinosaur duck, and release the down
+          key to release the dinosaur</p>
+        <p>Select a difficulty to begin, or press the spacebar to begin as Easy!</p>
+
+        <ul class="level-button-list">
+          <li>
+            <button class="level-button" value="easy">Easy</button>
+            <button class="level-button" value="medium">Medium</button>
+            <button class="level-button" value="difficult">Difficult</button>
+          </li>
+        </ul>
+      </div>
+
+      <div id="scoreboard" class="message-window">
+        <h3>GAME OVER</h3>
+        <p>Your score is: </p>
+        <p id="final-score"></p>
+        <p>Press spacebar to play again!
+      </div>
 
       <div class="score-window">
         <p>Your score is: </p>

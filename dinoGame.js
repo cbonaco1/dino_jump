@@ -17,9 +17,6 @@ $(document).ready(function() {
       e.preventDefault();
       if (!game.started) {
         game.start();
-
-
-
       }
       else {
         // game.stop();
