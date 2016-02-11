@@ -22,26 +22,62 @@ Game.prototype.setIntervals = function (difficulty) {
   }
 };
 
+//Creates obstacle, adds it to Game queue,
+//and then slide it
+Game.prototype.createObstacle = function () {
+  console.log("Enter createObstacle");
+
+  var obstacle = new Obstacle(this);
+
+  // debugger
+  //add the obstacle to the Game's queue of obstacles
+  this.addObstacle(obstacle.domElement);
+  // debugger
+
+  //append obstacle to game-field
+  this.field.appendChild(obstacle.domElement);
+
+  //10ms after obstacle is created, slide it
+  window.setTimeout(function() {
+    obstacle.slide();
+  }.bind(this), 10);
+
+  console.log("End of createObstacle");
+};
+
+
+Game.prototype.init = function () {
+  var generateObstacles = function() {
+    this.createObstacle();
+    var rand = Math.floor((Math.random() * 1000) + this.difficulty);
+    console.log("Random interval: " + rand);
+    this.obstacleInterval = window.setTimeout(generateObstacles, rand);
+  }.bind(this);
+
+  generateObstacles();
+};
+
 Game.prototype.start = function () {
   $("#welcome-message").hide();
   $("#scoreboard").hide();
   this.started = true;
   this.timeInterval = window.setInterval(this.incrementScore.bind(this), 50);
   this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
+  this.init();
+
+
+  //change interval at which the blocks are generated
+  //random number between difficulty and medium?
+  //give that to interval
+
+  //also change speed?
+  //object.style.transition = ...
+  //http://www.w3schools.com/jsref/prop_style_transition.asp
 
   //make obstacles at an interval depending on the difficulty level
-  this.obstacleInterval = window.setInterval(function(){
-    var obstacle = new Obstacle(this);
-
-    //append obstacle to game-field
-    this.field.appendChild(obstacle.domElement);
-
-    //10ms after obstacle is created, slide it
-    window.setTimeout(function() {
-      obstacle.slide();
-    }.bind(this), 10);
-
-  }.bind(this), this.difficulty);
+  // this.obstacleInterval = window.setInterval(function(){
+  //
+  // }.bind(this), 1000);
 
 };
 
@@ -56,11 +92,19 @@ Game.prototype.stop = function () {
   this.started = false;
   this.score = 0;
   this.obstacles = [];
+
+  //stop all transitions?
+  //iterate through obstalces and set their left property
 };
 
+//Adds obstacle to Game's queue of obstalces
 Game.prototype.addObstacle = function (obstacle) {
   this.obstacles.push(obstacle);
   console.log("Length: " + this.obstacles.length);
+};
+
+Game.prototype.removeObstacle = function () {
+  this.obstacles.shift();
 };
 
 Game.prototype.incrementScore = function () {
@@ -69,14 +113,9 @@ Game.prototype.incrementScore = function () {
   scoreLabel.innerHTML = this.score;
 };
 
-Game.prototype.removeObstacle = function () {
-  this.obstacles.shift();
-};
-
 Game.prototype.checkCollision = function () {
   //if collision is true, stop game
   if (this.obstacles.length > 0) {
-
     var obstacle = this.obstacles[0];
 
     var dinoLeft = $(this.dino).offset().left;
@@ -85,7 +124,6 @@ Game.prototype.checkCollision = function () {
     var dinoWidth = $(this.dino).outerWidth(true);
     var totalDinoHeight = dinoTop + dinoHeight;
     var totalDinoWidth = dinoLeft + dinoWidth;
-    // console.log(h + ", " + w);
 
     var obsLeft = $(obstacle).offset().left;
     var obsTop = $(obstacle).offset().top;
@@ -100,30 +138,17 @@ Game.prototype.checkCollision = function () {
     //horizontal
     var touching = obsLeft == (dinoLeft + dinoWidth);
 
-    if ( heightClearance && touching){
-      // this.stop();
-    }
-
     if ( (totalDinoHeight < obsTop) ||
           (dinoTop > totalObsHeight) ||
-          (totalDinoWidth < obsLeft) ||
-          (dinoLeft > totalObsWidth)) {
+          ((totalDinoWidth - 10) < obsLeft) ||
+          ((dinoLeft - 15) > totalObsWidth)) {
 
     }
     else {
       this.stop();
     }
 
-
-
-
-    //tests height
-    // if (totalDinoHeight >= totalObsHeight) {
-    //   // debugger
-    // }
   }
-
-  //check collision with first item in obstacle queue
 };
 
 module.exports = Game;

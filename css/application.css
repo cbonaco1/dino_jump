@@ -23,8 +23,8 @@ h2 {
 }
 
 #dino {
-  border: 1px solid white;
-  border-radius: 20px;
+  /*border: 1px solid white;*/
+  /*border-radius: 20px;*/
   position: absolute;
   width: 100px;
   height: 100px;
@@ -34,19 +34,19 @@ h2 {
   background: url('./../images/dino1.png');
   background-size: cover;
   transition: bottom 0.5s, height 0s;
-  border-bottom-right-radius: 45px;
-  border-bottom-left-radius: 45px;
+  /*border-bottom-right-radius: 45px;*/
+  /*border-bottom-left-radius: 45px;*/
 }
 
 .obstacle {
-  border: 2px solid red;
+  /*border: 2px solid red;*/
   position: absolute;
   bottom: 0;
   left: 1000px;
   background: url('./../images/boulder.png');
   background-size: cover;
   /*background: red;*/
-  transition: left 4s;
+  transition: left 3.5s;
   transition-timing-function: linear;
 }
 
@@ -59,7 +59,7 @@ h2 {
 }
 
 .duck {
-  transform: rotate(45deg);
+  transform: rotate(75deg);
 }
 
 
@@ -122,4 +122,15 @@ h2 {
 
 .level-button:hover {
   background: #7FB73A;
+}
+
+#sample-container {
+  border:1px solid red;
+  width:200px;
+  height: 200px;
+}
+
+#sample-dino {
+  width:100%;
+  height: auto;
 }

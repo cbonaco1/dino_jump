@@ -1,8 +1,8 @@
 var Obstacle = function(game) {
-  // this.obstacleHeight = Math.floor((Math.random() * 45) + 20);
-  // this.obstacleWidth = Math.floor((Math.random() * 45) + 20);
-  this.obstacleWidth = 20;
-  this.obstacleHeight = 20;
+  this.obstacleHeight = Math.floor((Math.random() * 40) + 20);
+  this.obstacleWidth = Math.floor((Math.random() * 40) + 20);
+  // this.obstacleWidth = 20;
+  // this.obstacleHeight = 20;
   this.game = game;
   this.domElement = this.generateElement();
 }
@@ -22,9 +22,6 @@ Obstacle.prototype.generateElement = function () {
   //set height and width
   newObstacle.style.height = this.obstacleHeight.toString() + "px";
   newObstacle.style.width = this.obstacleWidth.toString() + "px";
-
-  //add the obstacle to the Game's queue of obstacles
-  this.game.addObstacle(newObstacle);
 
   return newObstacle;
 };
