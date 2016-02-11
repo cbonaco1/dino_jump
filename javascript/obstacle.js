@@ -1,8 +1,8 @@
 var Obstacle = function(game) {
-  this.obstacleHeight = Math.floor((Math.random() * 40) + 20);
-  this.obstacleWidth = Math.floor((Math.random() * 40) + 20);
-  // this.obstacleWidth = 20;
-  // this.obstacleHeight = 20;
+  this.obstacleHeight = Math.floor((Math.random() * 35) + 10);
+  this.obstacleWidth = Math.floor((Math.random() * 35) + 10);
+  // this.obstacleWidth = 10;
+  // this.obstacleHeight = 50;
   this.game = game;
   this.domElement = this.generateElement();
 }

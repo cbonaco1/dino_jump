@@ -74,11 +74,6 @@ Game.prototype.start = function () {
   //object.style.transition = ...
   //http://www.w3schools.com/jsref/prop_style_transition.asp
 
-  //make obstacles at an interval depending on the difficulty level
-  // this.obstacleInterval = window.setInterval(function(){
-  //
-  // }.bind(this), 1000);
-
 };
 
 Game.prototype.stop = function () {
@@ -122,7 +117,7 @@ Game.prototype.checkCollision = function () {
     var dinoTop = $(this.dino).offset().top;
     var dinoHeight = $(this.dino).outerHeight(true);
     var dinoWidth = $(this.dino).outerWidth(true);
-    var totalDinoHeight = dinoTop + dinoHeight;
+    var totalDinoHeight = dinoTop + dinoHeight + 22;
     var totalDinoWidth = dinoLeft + dinoWidth;
 
     var obsLeft = $(obstacle).offset().left;
@@ -140,8 +135,8 @@ Game.prototype.checkCollision = function () {
 
     if ( (totalDinoHeight < obsTop) ||
           (dinoTop > totalObsHeight) ||
-          ((totalDinoWidth - 10) < obsLeft) ||
-          ((dinoLeft - 15) > totalObsWidth)) {
+          ((totalDinoWidth) < obsLeft) ||
+          ((dinoLeft + 35) > totalObsWidth)) {
 
     }
     else {

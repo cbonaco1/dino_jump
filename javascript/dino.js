@@ -12,10 +12,10 @@ Dino.prototype.addListeners = function () {
 
 Dino.prototype.jump = function () {
   // console.log("jumping");
-  this.htmlElement.style.bottom = "90px";
+  this.htmlElement.style.bottom = "100px";
 
   window.setTimeout(function() {
-    this.htmlElement.style.bottom = "0px";
+    this.htmlElement.style.bottom = "22px";
   }.bind(this), 500);
 };
 
