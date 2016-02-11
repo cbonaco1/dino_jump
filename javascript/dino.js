@@ -4,25 +4,30 @@ var Dino = function(dinoElement) {
 }
 
 Dino.prototype.addListeners = function () {
-  this.htmlElement.addEventListener("transitionend", function() {
-    this.htmlElement.style.bottom = "0px";
-  }.bind(this));
+  // this.htmlElement.addEventListener("transitionend", function() {
+  //   console.log("---transitionend---");
+  //   this.htmlElement.style.bottom = "0px";
+  // }.bind(this));
 };
 
 Dino.prototype.jump = function () {
-  this.htmlElement.style.bottom = "75px";
+  // console.log("jumping");
+  this.htmlElement.style.bottom = "90px";
 
-  // window.setTimeout(function() {
-  //   this.htmlElement.style.bottom = "0px";
-  // }.bind(this), 500);
+  window.setTimeout(function() {
+    this.htmlElement.style.bottom = "0px";
+  }.bind(this), 500);
 };
 
+//Try rotating the dino forward intead of ducking
 Dino.prototype.duck = function () {
-  this.htmlElement.style.height = "50px";
+  // this.htmlElement.style.height = "50px";
+  $(this.htmlElement).addClass("duck");
 };
 
 Dino.prototype.rise = function () {
-  this.htmlElement.style.height = "100px";
+  // this.htmlElement.style.height = "100px";
+  $(this.htmlElement).removeClass("duck");
 };
 
 module.exports = Dino;

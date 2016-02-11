@@ -24,6 +24,7 @@ h2 {
 
 #dino {
   border: 1px solid white;
+  border-radius: 20px;
   position: absolute;
   width: 100px;
   height: 100px;
@@ -33,6 +34,8 @@ h2 {
   background: url('./../images/dino1.png');
   background-size: cover;
   transition: bottom 0.5s, height 0s;
+  border-bottom-right-radius: 45px;
+  border-bottom-left-radius: 45px;
 }
 
 .obstacle {
@@ -43,17 +46,23 @@ h2 {
   background: url('./../images/boulder.png');
   background-size: cover;
   /*background: red;*/
-  transition: left 2s;
+  transition: left 4s;
   transition-timing-function: linear;
 }
 
 .jump {
-  bottom: 30px;
-}
-
-.high-jump {
   bottom: 50px;
 }
+
+.down {
+  bottom: 0;
+}
+
+.duck {
+  transform: rotate(45deg);
+}
+
+
 
 
 #game-field {
