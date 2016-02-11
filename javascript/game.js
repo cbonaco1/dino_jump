@@ -1,15 +1,26 @@
 var Obstacle = require('./obstacle');
 
-var Game = function() {
+var Game = function(level) {
   this.score = 0;
   this.started = false;
   this.dino = document.getElementById("dino");
   this.obstacles = [];
-  this.DIM_X = 1000;
-  this.DIM_Y = 400;
   this.field = document.getElementById("game-field");
-  //this.difficulty
+  this.difficulty = this.setIntervals(level);
 }
+
+//Sets the interval at which obstacles are created
+Game.prototype.setIntervals = function (difficulty) {
+  switch (difficulty) {
+    case "easy":
+      return 3000;
+    case "medium":
+      return 2000;
+    case "hard":
+      return 1000;
+    default:
+  }
+};
 
 Game.prototype.start = function () {
   $("#welcome-message").hide();
@@ -18,8 +29,7 @@ Game.prototype.start = function () {
   this.timeInterval = window.setInterval(this.incrementScore.bind(this), 50);
   this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
 
-  //make obstacles every 1 second
-  //This time interval could change with difficulty level of game
+  //make obstacles at an interval depending on the difficulty level
   this.obstacleInterval = window.setInterval(function(){
     var obstacle = new Obstacle(this);
 
@@ -31,8 +41,7 @@ Game.prototype.start = function () {
       obstacle.slide();
     }.bind(this), 10);
 
-  }.bind(this), 3000);
-
+  }.bind(this), this.difficulty);
 
 };
 

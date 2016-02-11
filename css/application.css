@@ -15,6 +15,7 @@ ul {
 body {
   text-align: center;
   background: #7FB73A;
+  font-family: "Helvetica", sans-serif;
 }
 
 h2 {
@@ -22,6 +23,7 @@ h2 {
 }
 
 #dino {
+  border: 1px solid white;
   position: absolute;
   width: 100px;
   height: 100px;
@@ -34,13 +36,14 @@ h2 {
 }
 
 .obstacle {
+  border: 2px solid red;
   position: absolute;
   bottom: 0;
   left: 1000px;
-  /*background: url('./../images/boulder.png');*/
-  /*background-size: cover;*/
-  background: red;
-  transition: left 3s;
+  background: url('./../images/boulder.png');
+  background-size: cover;
+  /*background: red;*/
+  transition: left 2s;
   transition-timing-function: linear;
 }
 
@@ -57,7 +60,7 @@ h2 {
   position: relative;
   color: #fff;
   border: 1px solid #4CAF50;
-  width: 1000px;
+  max-width: 1000px;
   height: 400px;
   margin: 25px auto;
   padding: 10px;
@@ -86,6 +89,10 @@ h2 {
   border-radius: 15px;
   color: #545556;
   box-shadow: 5px 5px 5px #132D0C;
+}
+
+.message-window p {
+  margin-bottom: 6px;
 }
 
 .welcome-header {

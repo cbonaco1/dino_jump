@@ -15,22 +15,39 @@
         <p>Use the spacebar to make the dinosaur jump over the obstacles</p>
         <p>Press the down key to make the dinosaur duck, and release the down
           key to release the dinosaur</p>
-        <p>Select a difficulty to begin, or press the spacebar to begin as Easy!</p>
+        <p>Select a difficulty to begin!</p>
 
         <ul class="level-button-list">
           <li>
             <button class="level-button" value="easy">Easy</button>
             <button class="level-button" value="medium">Medium</button>
-            <button class="level-button" value="difficult">Difficult</button>
+            <button class="level-button" value="hard">Hard</button>
           </li>
         </ul>
       </div>
+
+      <!-- TODO
+      -Fix bounds of dino (not a square)
+      -Dont allow user to hold down spacebar to hold up dino
+      -Birds flying across (make dino duck)
+      -Vary rate at which obstacles appear
+      -Vary speed of the transition based on difficulty
+      -Sprites - canvas demo
+      -Make dino an image instead of a div?
+      -->
 
       <div id="scoreboard" class="message-window">
         <h3>GAME OVER</h3>
         <p>Your score is: </p>
         <p id="final-score"></p>
-        <p>Press spacebar to play again!
+        <p>Select a difficulty to play again!</p>
+        <ul class="level-button-list">
+          <li>
+            <button class="level-button" value="easy">Easy</button>
+            <button class="level-button" value="medium">Medium</button>
+            <button class="level-button" value="hard">Hard</button>
+          </li>
+        </ul>
       </div>
 
       <div class="score-window">
