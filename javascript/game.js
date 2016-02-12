@@ -11,28 +11,36 @@ var Game = function(level) {
 
 //Sets the interval at which obstacles are created
 Game.prototype.setIntervals = function (difficulty) {
+  //make object with speed and interval
+  var settings = {}
+  //easy - 2.5s
+  //medium 1.5s
+  //hard 1.0s
   switch (difficulty) {
     case "easy":
-      return 3000;
+      settings["interval"] = 3000;
+      settings["speed"] = "left 2.5s";
+      break;
     case "medium":
-      return 2000;
+      settings["interval"] = 2000;
+      settings["speed"] = "left 1.5s";
+      break;
     case "hard":
-      return 1000;
-    default:
+      settings["interval"] = 1000;
+      settings["speed"] = "left 1.0s";
+      break;
   }
+  return settings;
 };
 
 //Creates obstacle, adds it to Game queue,
 //and then slide it
 Game.prototype.createObstacle = function () {
-  console.log("Enter createObstacle");
 
   var obstacle = new Obstacle(this);
 
-  // debugger
   //add the obstacle to the Game's queue of obstacles
   this.addObstacle(obstacle.domElement);
-  // debugger
 
   //append obstacle to game-field
   this.field.appendChild(obstacle.domElement);
@@ -42,15 +50,14 @@ Game.prototype.createObstacle = function () {
     obstacle.slide();
   }.bind(this), 10);
 
-  console.log("End of createObstacle");
-};
+  // debugger
 
+};
 
 Game.prototype.init = function () {
   var generateObstacles = function() {
     this.createObstacle();
-    var rand = Math.floor((Math.random() * 1000) + this.difficulty);
-    console.log("Random interval: " + rand);
+    var rand = Math.floor((Math.random() * 1000) + this.difficulty.interval);
     this.obstacleInterval = window.setTimeout(generateObstacles, rand);
   }.bind(this);
 

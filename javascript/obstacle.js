@@ -23,12 +23,14 @@ Obstacle.prototype.generateElement = function () {
   newObstacle.style.height = this.obstacleHeight.toString() + "px";
   newObstacle.style.width = this.obstacleWidth.toString() + "px";
 
+  //this.difficulty.speed is the speed of the transitions
+  newObstacle.style.transition = this.game.difficulty.speed;
+  newObstacle.style.transitionTimingFunction = "linear";
+
   return newObstacle;
 };
 
 Obstacle.prototype.slide = function () {
-  // var mostLeft = (this.obstacleWidth * -1);
-  // this.domElement.style.left = mostLeft.toString() + "px";
   this.domElement.style.left = "0px";
 };
 

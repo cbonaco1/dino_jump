@@ -38,12 +38,11 @@ h2 {
 }
 
 .obstacle {
-  /*border: 2px solid blue;*/
   position: absolute;
   bottom: 0;
   left: 1000px;
-  transition: left 1.5s;
-  transition-timing-function: linear;
+  /*transition: left 1.0s;*/
+  /*transition-timing-function: linear;*/
   background: linear-gradient(#aaa, #fff);
 }
 
