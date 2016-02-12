@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DinoJump</title>
+    <link rel="stylesheet" href="./css/application.css" charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="./javascript/bundle.js"></script>
+  </head>
+  <body>
+    <div id="game-field">
+      <div id="welcome-message" class="message-window">
+        <h3 class="welcome-header">Welcome to DinoJump!</h3>
+        <p>The object of the game is to avoid the obstalces</p>
+        <p>Use the spacebar to make the dinosaur jump over the obstacles</p>
+        <p>Select a difficulty to begin!</p>
+
+        <ul class="level-button-list">
+          <li>
+            <button class="level-button" value="easy">Easy</button>
+            <button class="level-button" value="medium">Medium</button>
+            <button class="level-button" value="hard">Hard</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- TODO
+      -Fix bounds of dino (not a square)
+      -Birds flying across (make dino duck)
+      -Rotate dino forward instead of putting it down
+      -Move the dino left/right?
+      -Add points if they jump on a gold box
+        Generate a random integer between 60000-120000
+        At that interval, make a gold square
+        This makes it appear at a random time after one minute of play
+        Reset this interval after displayed or game ends
+      -->
+
+      <div id="scoreboard" class="message-window">
+        <h3>GAME OVER</h3>
+        <p>Your score is: </p>
+        <p id="final-score"></p>
+        <p>Select a difficulty to play again!</p>
+        <ul class="level-button-list">
+          <li>
+            <button class="level-button" value="easy">Easy</button>
+            <button class="level-button" value="medium">Medium</button>
+            <button class="level-button" value="hard">Hard</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="score-window">
+        <p>Your score is: </p>
+        <p id="score">0</p>
+      </div>
+
+      <div id="dino">
+        <img id="dino-img" src="./images/dino1.png" />
+      </div>
+
+    </div>
+
+    <p>
+      Press the spacebar to jump over the obstacles!
+      Press and hold the down key to make the dino duck, release the
+      down key to make him stand up. Avoid the obstacles!
+    </p>
+
+    <p>
+      Vist my GitHub page <a href="http://www.github.com/cbonaco1"
+                          target="_blank">here</a>
+      for more code samples
+    </p>
+
+  </body>
+</html>

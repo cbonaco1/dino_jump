@@ -1,0 +1,115 @@
+html, body, h2, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  font: inherit;
+  font-size: inherit;
+  font-style: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+body {
+  text-align: center;
+  background: #7FB73A;
+  font-family: "Helvetica", sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+#dino-img {
+  width: 120%;
+  height: auto;
+}
+
+#dino {
+  position: absolute;
+  /*border: 1px solid red;*/
+  width: 100px;
+  height: 100px;
+  bottom: 22px;
+  left: 200px;
+  transition: bottom 0.5s, height 0s;
+  -webkit-transition: bottom 0.5s, height 0s;
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 0;
+  left: 1000px;
+  /*transition: left 1.0s;*/
+  /*transition-timing-function: linear;*/
+  background: linear-gradient(#aaa, #fff);
+}
+
+.jump {
+  bottom: 50px;
+}
+
+.duck {
+  transform: rotate(75deg);
+}
+
+#game-field {
+  position: relative;
+  color: #fff;
+  border: 1px solid #4CAF50;
+  max-width: 1000px;
+  height: 400px;
+  margin: 25px auto;
+  padding: 10px;
+  background-image: url('./../images/background.jpg');
+}
+
+.score-window {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.score-window p {
+  display: inline;
+}
+
+#scoreboard {
+  display: none;
+}
+
+.message-window {
+  margin: 15px auto;
+  border: 1px solid green;
+  background: #FFEB3B;
+  width: 500px;
+  border-radius: 15px;
+  color: #545556;
+  box-shadow: 5px 5px 5px #132D0C;
+}
+
+.message-window p {
+  margin-bottom: 6px;
+}
+
+.welcome-header {
+  border-bottom: 1px solid green;
+}
+
+.level-button {
+  width: 75%;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border: 1px solid yellow;
+  background: #338826;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+.level-button:hover {
+  background: #7FB73A;
+}
