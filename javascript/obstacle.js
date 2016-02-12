@@ -1,9 +1,13 @@
 var Obstacle = function(game) {
-  this.obstacleHeight = Math.floor((Math.random() * 35) + 10);
-  this.obstacleWidth = Math.floor((Math.random() * 35) + 10);
-  // this.obstacleWidth = 10;
-  // this.obstacleHeight = 50;
   this.game = game;
+
+  var max = this.game.settings.maxObstacleDimension;
+  var min = this.game.settings.minObstacleDimension;
+  var diff = max - min;
+
+  this.obstacleHeight = Math.floor((Math.random() * diff) + min);
+  this.obstacleWidth = Math.floor((Math.random() * diff) + min);
+
   this.domElement = this.generateElement();
 }
 
@@ -24,11 +28,11 @@ Obstacle.prototype.generateElement = function () {
   newObstacle.style.width = this.obstacleWidth.toString() + "px";
 
   //this.difficulty.speed is the speed of the transitions
-  newObstacle.style.transition = this.game.difficulty.speed;
+  newObstacle.style.transition = this.game.settings.speed;
   newObstacle.style.transitionTimingFunction = "linear";
 
   //webkit
-  newObstacle.style.setProperty("-webkit-transition", this.game.difficulty.speed);
+  newObstacle.style.setProperty("-webkit-transition", this.game.settings.speed);
   newObstacle.style.setProperty("-webkit-transition-timing-function", "linear");
 
   return newObstacle;

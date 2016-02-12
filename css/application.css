@@ -42,9 +42,8 @@ h2 {
   position: absolute;
   bottom: 0;
   left: 1000px;
-  /*transition: left 1.0s;*/
-  /*transition-timing-function: linear;*/
-  background: linear-gradient(#aaa, #fff);
+  background-image: url('./../images/boulder-background.jpg');
+  border-radius: 5px;
 }
 
 .jump {
@@ -64,6 +63,7 @@ h2 {
   margin: 25px auto;
   padding: 10px;
   background-image: url('./../images/background.jpg');
+  border-radius: 10px;
 }
 
 .score-window {

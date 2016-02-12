@@ -6,28 +6,37 @@ var Game = function(level) {
   this.dino = document.getElementById("dino");
   this.obstacles = [];
   this.field = document.getElementById("game-field");
-  this.difficulty = this.setIntervals(level);
+  this.settings = this.setIntervals(level);
 }
 
-//Sets the interval at which obstacles are created
+//Sets gameplay settings
 Game.prototype.setIntervals = function (difficulty) {
-  //make object with speed and interval
   var settings = {}
-  //easy - 2.5s
-  //medium 1.5s
-  //hard 1.0s
+
   switch (difficulty) {
     case "easy":
+      settings["level"] = "easy";
       settings["interval"] = 3000;
       settings["speed"] = "left 2.5s";
+      settings["jumpHeight"] = "100px";
+      settings["minObstacleDimension"] = 30;
+      settings["maxObstacleDimension"] = 50;
       break;
     case "medium":
+    settings["level"] = "medium";
       settings["interval"] = 1500;
       settings["speed"] = "left 1.5s";
+      settings["jumpHeight"] = "150px";
+      settings["minObstacleDimension"] = 50;
+      settings["maxObstacleDimension"] = 100;
       break;
     case "hard":
+      settings["level"] = "hard";
       settings["interval"] = 1000;
       settings["speed"] = "left 1.0s";
+      settings["jumpHeight"] = "200px";
+      settings["minObstacleDimension"] = 100;
+      settings["maxObstacleDimension"] = 140;
       break;
   }
   return settings;
@@ -55,7 +64,7 @@ Game.prototype.createObstacle = function () {
 Game.prototype.init = function () {
   var generateObstacles = function() {
     this.createObstacle();
-    var rand = Math.floor((Math.random() * 1000) + this.difficulty.interval);
+    var rand = Math.floor((Math.random() * 1000) + this.settings.interval);
     console.log("Interval: " + rand);
     this.obstacleInterval = window.setTimeout(generateObstacles, rand);
   }.bind(this);

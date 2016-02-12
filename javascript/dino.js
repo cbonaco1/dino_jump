@@ -1,33 +1,35 @@
 var Dino = function(dinoElement) {
-  this.htmlElement = dinoElement;
-  this.addListeners();
+  this.dino = dinoElement;
 }
 
-Dino.prototype.addListeners = function () {
-  // this.htmlElement.addEventListener("transitionend", function() {
-  //   console.log("---transitionend---");
-  //   this.htmlElement.style.bottom = "0px";
-  // }.bind(this));
+Dino.prototype.setJumpHeight = function (height) {
+  this.jumpHeight = height;
 };
 
 Dino.prototype.jump = function () {
-  // console.log("jumping");
-  this.htmlElement.style.bottom = "100px";
+  if (this.jumpHeight) {
+    this.dino.style.bottom = this.jumpHeight;
+  }
+  else {
+    //makes the dino jump before the game is set
+    //allow user to test out jumping before game starts
+    this.dino.style.bottom = "200px";
+  }
 
   window.setTimeout(function() {
-    this.htmlElement.style.bottom = "22px";
+    this.dino.style.bottom = "22px";
   }.bind(this), 500);
 };
 
 //Try rotating the dino forward intead of ducking
 Dino.prototype.duck = function () {
-  // this.htmlElement.style.height = "50px";
-  $(this.htmlElement).addClass("duck");
+  // this.dino.style.height = "50px";
+  $(this.dino).addClass("duck");
 };
 
 Dino.prototype.rise = function () {
-  // this.htmlElement.style.height = "100px";
-  $(this.htmlElement).removeClass("duck");
+  // this.dino.style.height = "100px";
+  $(this.dino).removeClass("duck");
 };
 
 module.exports = Dino;

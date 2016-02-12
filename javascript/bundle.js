@@ -48,26 +48,25 @@
 	var Dino = __webpack_require__(3);
 	var Obstacle = __webpack_require__(2);
 	
-	  //TODO Get difficulty from user, then pass this into Game object
-	  //this represents the speed at which the obstalces will come out
-	
 	$(document).ready(function() {
-	  var dinoElement = document.getElementById("dino");
-	  var dino = new Dino(dinoElement);
-	  var gameField = document.getElementById("game-field");
+	  var dino = new Dino(document.getElementById("dino"));
 	  var makeJump = true;
 	
 	  var startButtons = document.getElementsByClassName("level-button");
 	  for (var i = 0; i < startButtons.length; i++) {
 	    startButtons[i].addEventListener("click", function(e){
+	
 	      var game = new Game(e.target.value);
-	        if (!game.started) {
-	          game.start();
-	        }
-	        else {
-	          // game.stop();
-	          // window.clearInterval(this.obstalceInterval);
-	        }
+	
+	      if (!game.started) {
+	        game.start();
+	        dino.setJumpHeight(game.settings.jumpHeight);
+	        // debugger
+	      }
+	      else {
+	        // game.stop();
+	        // window.clearInterval(this.obstalceInterval);
+	      }
 	
 	    });
 	  }
@@ -86,7 +85,6 @@
 	    }
 	  });
 	
-	
 	  document.addEventListener("keyup", function(e){
 	    makeJump = true;
 	
@@ -94,10 +92,7 @@
 	      e.preventDefault();
 	      dino.rise();
 	    }
-	    // if (e.keyCode === 32) {
-	    //   e.preventDefault();
-	    //   dino.down();
-	    // }
+	
 	  });
 	
 	});
@@ -115,28 +110,37 @@
 	  this.dino = document.getElementById("dino");
 	  this.obstacles = [];
 	  this.field = document.getElementById("game-field");
-	  this.difficulty = this.setIntervals(level);
+	  this.settings = this.setIntervals(level);
 	}
 	
-	//Sets the interval at which obstacles are created
+	//Sets gameplay settings
 	Game.prototype.setIntervals = function (difficulty) {
-	  //make object with speed and interval
 	  var settings = {}
-	  //easy - 2.5s
-	  //medium 1.5s
-	  //hard 1.0s
+	
 	  switch (difficulty) {
 	    case "easy":
+	      settings["level"] = "easy";
 	      settings["interval"] = 3000;
 	      settings["speed"] = "left 2.5s";
+	      settings["jumpHeight"] = "100px";
+	      settings["minObstacleDimension"] = 30;
+	      settings["maxObstacleDimension"] = 50;
 	      break;
 	    case "medium":
+	    settings["level"] = "medium";
 	      settings["interval"] = 1500;
 	      settings["speed"] = "left 1.5s";
+	      settings["jumpHeight"] = "150px";
+	      settings["minObstacleDimension"] = 50;
+	      settings["maxObstacleDimension"] = 100;
 	      break;
 	    case "hard":
+	      settings["level"] = "hard";
 	      settings["interval"] = 1000;
 	      settings["speed"] = "left 1.0s";
+	      settings["jumpHeight"] = "200px";
+	      settings["minObstacleDimension"] = 100;
+	      settings["maxObstacleDimension"] = 140;
 	      break;
 	  }
 	  return settings;
@@ -164,7 +168,7 @@
 	Game.prototype.init = function () {
 	  var generateObstacles = function() {
 	    this.createObstacle();
-	    var rand = Math.floor((Math.random() * 1000) + this.difficulty.interval);
+	    var rand = Math.floor((Math.random() * 1000) + this.settings.interval);
 	    console.log("Interval: " + rand);
 	    this.obstacleInterval = window.setTimeout(generateObstacles, rand);
 	  }.bind(this);
@@ -269,11 +273,15 @@
 /***/ function(module, exports) {
 
 	var Obstacle = function(game) {
-	  this.obstacleHeight = Math.floor((Math.random() * 35) + 10);
-	  this.obstacleWidth = Math.floor((Math.random() * 35) + 10);
-	  // this.obstacleWidth = 10;
-	  // this.obstacleHeight = 50;
 	  this.game = game;
+	
+	  var max = this.game.settings.maxObstacleDimension;
+	  var min = this.game.settings.minObstacleDimension;
+	  var diff = max - min;
+	
+	  this.obstacleHeight = Math.floor((Math.random() * diff) + min);
+	  this.obstacleWidth = Math.floor((Math.random() * diff) + min);
+	
 	  this.domElement = this.generateElement();
 	}
 	
@@ -294,11 +302,11 @@
 	  newObstacle.style.width = this.obstacleWidth.toString() + "px";
 	
 	  //this.difficulty.speed is the speed of the transitions
-	  newObstacle.style.transition = this.game.difficulty.speed;
+	  newObstacle.style.transition = this.game.settings.speed;
 	  newObstacle.style.transitionTimingFunction = "linear";
 	
 	  //webkit
-	  newObstacle.style.setProperty("-webkit-transition", this.game.difficulty.speed);
+	  newObstacle.style.setProperty("-webkit-transition", this.game.settings.speed);
 	  newObstacle.style.setProperty("-webkit-transition-timing-function", "linear");
 	
 	  return newObstacle;
@@ -316,35 +324,37 @@
 /***/ function(module, exports) {
 
 	var Dino = function(dinoElement) {
-	  this.htmlElement = dinoElement;
-	  this.addListeners();
+	  this.dino = dinoElement;
 	}
 	
-	Dino.prototype.addListeners = function () {
-	  // this.htmlElement.addEventListener("transitionend", function() {
-	  //   console.log("---transitionend---");
-	  //   this.htmlElement.style.bottom = "0px";
-	  // }.bind(this));
+	Dino.prototype.setJumpHeight = function (height) {
+	  this.jumpHeight = height;
 	};
 	
 	Dino.prototype.jump = function () {
-	  // console.log("jumping");
-	  this.htmlElement.style.bottom = "100px";
+	  if (this.jumpHeight) {
+	    this.dino.style.bottom = this.jumpHeight;
+	  }
+	  else {
+	    //makes the dino jump before the game is set
+	    //allow user to test out jumping before game starts
+	    this.dino.style.bottom = "200px";
+	  }
 	
 	  window.setTimeout(function() {
-	    this.htmlElement.style.bottom = "22px";
+	    this.dino.style.bottom = "22px";
 	  }.bind(this), 500);
 	};
 	
 	//Try rotating the dino forward intead of ducking
 	Dino.prototype.duck = function () {
-	  // this.htmlElement.style.height = "50px";
-	  $(this.htmlElement).addClass("duck");
+	  // this.dino.style.height = "50px";
+	  $(this.dino).addClass("duck");
 	};
 	
 	Dino.prototype.rise = function () {
-	  // this.htmlElement.style.height = "100px";
-	  $(this.htmlElement).removeClass("duck");
+	  // this.dino.style.height = "100px";
+	  $(this.dino).removeClass("duck");
 	};
 	
 	module.exports = Dino;
