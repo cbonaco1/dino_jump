@@ -22,7 +22,7 @@ Game.prototype.setIntervals = function (difficulty) {
       settings["speed"] = "left 2.5s";
       break;
     case "medium":
-      settings["interval"] = 2000;
+      settings["interval"] = 1500;
       settings["speed"] = "left 1.5s";
       break;
     case "hard":
@@ -50,14 +50,13 @@ Game.prototype.createObstacle = function () {
     obstacle.slide();
   }.bind(this), 10);
 
-  // debugger
-
 };
 
 Game.prototype.init = function () {
   var generateObstacles = function() {
     this.createObstacle();
     var rand = Math.floor((Math.random() * 1000) + this.difficulty.interval);
+    console.log("Interval: " + rand);
     this.obstacleInterval = window.setTimeout(generateObstacles, rand);
   }.bind(this);
 

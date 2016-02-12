@@ -27,6 +27,10 @@ Obstacle.prototype.generateElement = function () {
   newObstacle.style.transition = this.game.difficulty.speed;
   newObstacle.style.transitionTimingFunction = "linear";
 
+  //webkit
+  newObstacle.style.setProperty("-webkit-transition", this.game.difficulty.speed);
+  newObstacle.style.setProperty("-webkit-transition-timing-function", "linear");
+
   return newObstacle;
 };
 

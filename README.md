@@ -20,4 +20,4 @@ Technologies used to develop this application include:
 * CSS
 
 
-http://www.tilcode.com/add-a-screenshot-to-your-github-repo-readme-md/
+![alt text](images/screenshots/screenshot_main.png "Landing Page")
