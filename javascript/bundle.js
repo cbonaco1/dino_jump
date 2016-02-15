@@ -61,23 +61,24 @@
 	      if (!game.started) {
 	        game.start();
 	        dino.setJumpHeight(game.settings.jumpHeight);
-	        // debugger
-	      }
-	      else {
-	        // game.stop();
-	        // window.clearInterval(this.obstalceInterval);
 	      }
 	
 	    });
 	  }
 	
 	  document.addEventListener("keydown", function(e){
+	    //40 == down key
 	    if (e.keyCode === 40) {
 	      e.preventDefault();
 	      dino.duck();
 	    }
+	
+	    //32 == space bar
 	    if (e.keyCode === 32) {
 	      e.preventDefault();
+	
+	      //prevents the dino from being held up if the user
+	      //holds down spacebar
 	      if (makeJump) {
 	        dino.jump();
 	      }
@@ -88,6 +89,7 @@
 	  document.addEventListener("keyup", function(e){
 	    makeJump = true;
 	
+	    //40 == down key
 	    if (e.keyCode === 40) {
 	      e.preventDefault();
 	      dino.rise();
@@ -125,6 +127,7 @@
 	      settings["jumpHeight"] = "100px";
 	      settings["minObstacleDimension"] = 30;
 	      settings["maxObstacleDimension"] = 50;
+	      settings["doubleScoreInterval"] = 62000;
 	      break;
 	    case "medium":
 	    settings["level"] = "medium";
@@ -133,6 +136,7 @@
 	      settings["jumpHeight"] = "150px";
 	      settings["minObstacleDimension"] = 50;
 	      settings["maxObstacleDimension"] = 100;
+	      settings["doubleScoreInterval"] = 32000;
 	      break;
 	    case "hard":
 	      settings["level"] = "hard";
@@ -141,6 +145,7 @@
 	      settings["jumpHeight"] = "200px";
 	      settings["minObstacleDimension"] = 100;
 	      settings["maxObstacleDimension"] = 140;
+	      settings["doubleScoreInterval"] = 17000;
 	      break;
 	  }
 	  return settings;
@@ -169,7 +174,6 @@
 	  var generateObstacles = function() {
 	    this.createObstacle();
 	    var rand = Math.floor((Math.random() * 1000) + this.settings.interval);
-	    console.log("Interval: " + rand);
 	    this.obstacleInterval = window.setTimeout(generateObstacles, rand);
 	  }.bind(this);
 	
@@ -180,41 +184,29 @@
 	  $("#welcome-message").hide();
 	  $("#scoreboard").hide();
 	  this.started = true;
-	  this.timeInterval = window.setInterval(this.incrementScore.bind(this), 50);
+	  this.scoreInterval = window.setInterval(this.incrementScore.bind(this), 50);
 	  this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
+	  this.doubleScoreInterval = window.setInterval(this.doubleScore.bind(this), this.settings.doubleScoreInterval);
 	  this.init();
-	
-	
-	  //change interval at which the blocks are generated
-	  //random number between difficulty and medium?
-	  //give that to interval
-	
-	  //also change speed?
-	  //object.style.transition = ...
-	  //http://www.w3schools.com/jsref/prop_style_transition.asp
-	
 	};
 	
 	Game.prototype.stop = function () {
 	  var finalScore = document.getElementById("final-score");
 	  finalScore.innerHTML = this.score;
 	  $("#scoreboard").show();
-	  window.clearInterval(this.timeInterval);
+	  window.clearInterval(this.scoreInterval);
 	  window.clearInterval(this.collisionInterval);
 	  window.clearInterval(this.obstacleInterval);
+	  window.clearInterval(this.doubleScoreInterval);
 	
 	  this.started = false;
 	  this.score = 0;
 	  this.obstacles = [];
-	
-	  //stop all transitions?
-	  //iterate through obstalces and set their left property
 	};
 	
 	//Adds obstacle to Game's queue of obstalces
 	Game.prototype.addObstacle = function (obstacle) {
 	  this.obstacles.push(obstacle);
-	  console.log("Length: " + this.obstacles.length);
 	};
 	
 	Game.prototype.removeObstacle = function () {
@@ -225,6 +217,26 @@
 	  this.score += 1;
 	  var scoreLabel = document.getElementById("score");
 	  scoreLabel.innerHTML = this.score;
+	};
+	
+	Game.prototype.doubleScore = function () {
+	  this.score *= 2;
+	  var scoreLabel = document.getElementById("score");
+	  scoreLabel.innerHTML = this.score;
+	
+	  //show the window notifying player their score has doubled
+	  var scoreWindow = document.getElementById("double-score-window");
+	  scoreWindow.style.opacity = 1;
+	  scoreWindow.style.top = "50px";
+	  scoreWindow.style.transform = "rotate(360deg)";
+	
+	  //hide the window 3 seconds later
+	  window.setTimeout(function() {
+	    scoreWindow.style.opacity = 0;
+	    scoreWindow.style.top = "-50px";
+	    scoreWindow.style.transform = "rotate(-360deg)";
+	  }, 3000);
+	
 	};
 	
 	Game.prototype.checkCollision = function () {
@@ -245,12 +257,6 @@
 	    var obsWidth = $(obstacle).outerWidth(true);
 	    var totalObsHeight = obsHeight + obsTop;
 	    var totalObsWidth = obsLeft + obsWidth;
-	
-	    //if dino touches the obstacle from the top (squishes obstacle)
-	    var heightClearance = (totalDinoHeight >= totalObsHeight);
-	
-	    //horizontal
-	    var touching = obsLeft == (dinoLeft + dinoWidth);
 	
 	    if ( (totalDinoHeight < obsTop) ||
 	          (dinoTop > totalObsHeight) ||
