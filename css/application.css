@@ -40,13 +40,13 @@ h2 {
 }
 
 .obstacle {
-  /*opacity: 0.01;*/
+  opacity: 0.01;
   position: absolute;
   bottom: 0;
   left: 1000px;
   background-image: url('./../images/boulder-background.jpg');
   border-radius: 5px;
-  /*transition: opactiy 300ms;*/
+  transition: opacity 1000ms;
   /*this might make the obstacle appear smoother*/
 }
 
@@ -125,4 +125,10 @@ h2 {
 
 .level-button:hover {
   background: #7FB73A;
+}
+
+.gold-coin {
+  height: 50px;
+  width: 50px;
+
 }

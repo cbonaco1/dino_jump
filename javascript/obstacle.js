@@ -41,7 +41,8 @@ Obstacle.prototype.generateElement = function () {
 };
 
 Obstacle.prototype.slide = function () {
-  this.domElement.style.left = "0%";
+  this.domElement.style.left = "0px";
+  this.domElement.style.opacity = 1.0;
 };
 
 module.exports = Obstacle;
