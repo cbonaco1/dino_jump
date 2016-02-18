@@ -152,7 +152,7 @@
 	};
 	
 	//Creates obstacle, adds it to Game queue,
-	//and then slide it
+	//adds it to the DOM, and then slide it
 	Game.prototype.createObstacle = function () {
 	
 	  var obstacle = new Obstacle(this);
@@ -170,6 +170,7 @@
 	
 	};
 	
+	//Creates obstacles at random intervals
 	Game.prototype.init = function () {
 	  var generateObstacles = function() {
 	    this.createObstacle();
@@ -181,6 +182,7 @@
 	};
 	
 	Game.prototype.start = function () {
+	  $(".obstacle").remove();
 	  $("#welcome-message").hide();
 	  $("#scoreboard").hide();
 	  this.started = true;
@@ -191,9 +193,20 @@
 	};
 	
 	Game.prototype.stop = function () {
+	  //show user their score
 	  var finalScore = document.getElementById("final-score");
 	  finalScore.innerHTML = this.score;
 	  $("#scoreboard").show();
+	
+	  //stop all obstacle animations
+	  //this.obstalces
+	  this.obstacles.forEach(function(obstalce){
+	    var styles = window.getComputedStyle(obstalce);
+	    var newLeft = styles.getPropertyValue('left');
+	    obstalce.style.left = newLeft;
+	  });
+	
+	  //clear timers
 	  window.clearInterval(this.scoreInterval);
 	  window.clearInterval(this.collisionInterval);
 	  window.clearInterval(this.obstacleInterval);
@@ -201,7 +214,7 @@
 	
 	  this.started = false;
 	  this.score = 0;
-	  this.obstacles = [];
+	  // this.obstacles = [];
 	};
 	
 	//Adds obstacle to Game's queue of obstalces
@@ -211,6 +224,15 @@
 	
 	Game.prototype.removeObstacle = function () {
 	  this.obstacles.shift();
+	};
+	
+	Game.prototype.clearAllObstacles = function () {
+	  if (this.obstacles.length > 0) {
+	    this.obstacles.forEach(function(obstacle){
+	      this.removeObstacle();
+	      this.field.removeChild(obstacle);
+	    }.bind(this));
+	  }
 	};
 	
 	Game.prototype.incrementScore = function () {
@@ -299,8 +321,10 @@
 	  //When its transition is complete, remove it from the DOM
 	  //also remove it from the queue of obstacles
 	  newObstacle.addEventListener("transitionend", function(){
-	    gameField.removeChild(newObstacle);
-	    this.game.removeObstacle(newObstacle);
+	    if (this.game.started) {
+	      gameField.removeChild(newObstacle);
+	      this.game.removeObstacle(newObstacle);
+	    }
 	  }.bind(this));
 	
 	  //set height and width
@@ -319,7 +343,7 @@
 	};
 	
 	Obstacle.prototype.slide = function () {
-	  this.domElement.style.left = "0px";
+	  this.domElement.style.left = "0%";
 	};
 	
 	module.exports = Obstacle;

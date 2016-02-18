@@ -11,7 +11,7 @@ obstacles will start to appear. Your job is to make the Dino jump over them! You
 use the spacebar to make the Dino jump. Keep playing the game until you
 make contact with an obstacle (hopefull this is never).
 
-Click [here] to get started!
+Click <a href="http://cbonaco1.github.io/dino_jump/" target="_blank">here</a> to get started!
 
 Technologies used to develop this application include:
 

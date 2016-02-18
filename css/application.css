@@ -34,16 +34,20 @@ h2 {
   height: 100px;
   bottom: 22px;
   left: 200px;
+  /*Need height here?*/
   transition: bottom 0.5s, height 0s;
   -webkit-transition: bottom 0.5s, height 0s;
 }
 
 .obstacle {
+  /*opacity: 0.01;*/
   position: absolute;
   bottom: 0;
   left: 1000px;
   background-image: url('./../images/boulder-background.jpg');
   border-radius: 5px;
+  /*transition: opactiy 300ms;*/
+  /*this might make the obstacle appear smoother*/
 }
 
 .jump {

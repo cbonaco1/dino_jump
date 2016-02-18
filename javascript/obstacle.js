@@ -19,8 +19,10 @@ Obstacle.prototype.generateElement = function () {
   //When its transition is complete, remove it from the DOM
   //also remove it from the queue of obstacles
   newObstacle.addEventListener("transitionend", function(){
-    gameField.removeChild(newObstacle);
-    this.game.removeObstacle(newObstacle);
+    if (this.game.started) {
+      gameField.removeChild(newObstacle);
+      this.game.removeObstacle(newObstacle);
+    }
   }.bind(this));
 
   //set height and width
@@ -39,7 +41,7 @@ Obstacle.prototype.generateElement = function () {
 };
 
 Obstacle.prototype.slide = function () {
-  this.domElement.style.left = "0px";
+  this.domElement.style.left = "0%";
 };
 
 module.exports = Obstacle;

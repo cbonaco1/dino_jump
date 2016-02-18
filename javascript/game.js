@@ -46,7 +46,7 @@ Game.prototype.setIntervals = function (difficulty) {
 };
 
 //Creates obstacle, adds it to Game queue,
-//and then slide it
+//adds it to the DOM, and then slide it
 Game.prototype.createObstacle = function () {
 
   var obstacle = new Obstacle(this);
@@ -64,6 +64,7 @@ Game.prototype.createObstacle = function () {
 
 };
 
+//Creates obstacles at random intervals
 Game.prototype.init = function () {
   var generateObstacles = function() {
     this.createObstacle();
@@ -75,6 +76,7 @@ Game.prototype.init = function () {
 };
 
 Game.prototype.start = function () {
+  $(".obstacle").remove();
   $("#welcome-message").hide();
   $("#scoreboard").hide();
   this.started = true;
@@ -85,9 +87,20 @@ Game.prototype.start = function () {
 };
 
 Game.prototype.stop = function () {
+  //show user their score
   var finalScore = document.getElementById("final-score");
   finalScore.innerHTML = this.score;
   $("#scoreboard").show();
+
+  //stop all obstacle animations
+  //this.obstalces
+  this.obstacles.forEach(function(obstalce){
+    var styles = window.getComputedStyle(obstalce);
+    var newLeft = styles.getPropertyValue('left');
+    obstalce.style.left = newLeft;
+  });
+
+  //clear timers
   window.clearInterval(this.scoreInterval);
   window.clearInterval(this.collisionInterval);
   window.clearInterval(this.obstacleInterval);
@@ -95,7 +108,7 @@ Game.prototype.stop = function () {
 
   this.started = false;
   this.score = 0;
-  this.obstacles = [];
+  // this.obstacles = [];
 };
 
 //Adds obstacle to Game's queue of obstalces
@@ -105,6 +118,15 @@ Game.prototype.addObstacle = function (obstacle) {
 
 Game.prototype.removeObstacle = function () {
   this.obstacles.shift();
+};
+
+Game.prototype.clearAllObstacles = function () {
+  if (this.obstacles.length > 0) {
+    this.obstacles.forEach(function(obstacle){
+      this.removeObstacle();
+      this.field.removeChild(obstacle);
+    }.bind(this));
+  }
 };
 
 Game.prototype.incrementScore = function () {
