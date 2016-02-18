@@ -67,14 +67,13 @@
 	  }
 	
 	  document.addEventListener("keydown", function(e){
-	    //40 == down key
 	    if (e.keyCode === 40) {
 	      e.preventDefault();
 	      dino.duck();
 	    }
 	
 	    //32 == space bar
-	    if (e.keyCode === 32) {
+	    if ((e.keyCode === 32) || (e.keyCode == 38)) {
 	      e.preventDefault();
 	
 	      //prevents the dino from being held up if the user
