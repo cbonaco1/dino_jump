@@ -1,6 +1,6 @@
 # DinoJump
 
-Welcome to DinoJump!
+Welcome to <a href="http://cbonaco1.github.io/dino_jump/" target="_blank">DinoJump</a>!
 
 DinoJump is a browser game inspired by the Google Chrome
 "Unable to connect to the Internet" game. Go ahead and disconnect from the Internet (just breathe, it will be okay),
