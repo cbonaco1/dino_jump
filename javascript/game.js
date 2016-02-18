@@ -77,6 +77,7 @@ Game.prototype.init = function () {
 
 Game.prototype.start = function () {
   $(".obstacle").remove();
+  this.dino.style.bottom = "22px";
   $("#welcome-message").hide();
   $("#scoreboard").hide();
   this.started = true;
@@ -88,6 +89,7 @@ Game.prototype.start = function () {
 
 Game.prototype.stop = function () {
   //show user their score
+
   var finalScore = document.getElementById("final-score");
   finalScore.innerHTML = this.score;
   $("#scoreboard").show();
@@ -99,6 +101,10 @@ Game.prototype.stop = function () {
     var newLeft = styles.getPropertyValue('left');
     obstalce.style.left = newLeft;
   });
+
+  var dinoStyles = window.getComputedStyle(this.dino);
+  var currentBottom = dinoStyles.getPropertyValue('bottom');
+  this.dino.style.bottom = currentBottom;
 
   //clear timers
   window.clearInterval(this.scoreInterval);
