@@ -1,5 +1,7 @@
 var Obstacle = require('./obstacle');
 
+var x = 0;
+
 var Game = function(level) {
   this.score = 0;
   this.started = false;
@@ -84,6 +86,8 @@ Game.prototype.start = function () {
   this.scoreInterval = window.setInterval(this.incrementScore.bind(this), 50);
   this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
   this.doubleScoreInterval = window.setInterval(this.doubleScore.bind(this), this.settings.doubleScoreInterval);
+  this.slideBackgroundInterval = window.setInterval(this.slideBackground.bind(this, 0), 10);
+
   this.init();
 };
 
@@ -111,6 +115,8 @@ Game.prototype.stop = function () {
   window.clearInterval(this.collisionInterval);
   window.clearInterval(this.obstacleInterval);
   window.clearInterval(this.doubleScoreInterval);
+  window.clearInterval(this.slideBackgroundInterval);
+
 
   this.started = false;
   this.score = 0;
@@ -159,6 +165,13 @@ Game.prototype.doubleScore = function () {
     scoreWindow.style.transform = "rotate(-360deg)";
   }, 3000);
 
+};
+
+//keep sliding background to the left
+//since the background is set to repeat-x, then this is okay
+Game.prototype.slideBackground = function () {
+  x -= 1;
+  this.field.style.backgroundPosition = x + "px 0";
 };
 
 Game.prototype.checkCollision = function () {
