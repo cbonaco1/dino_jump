@@ -45,4 +45,11 @@ Obstacle.prototype.slide = function () {
   this.domElement.style.opacity = 1.0;
 };
 
+Obstacle.prototype.inherits = function (BaseClass) {
+  function Surrogate () {};
+  Surrogate.prototype = BaseClass.prototype;
+  this.prototype = new Surrogate();
+  this.prototype.constructor = this;
+};
+
 module.exports = Obstacle;

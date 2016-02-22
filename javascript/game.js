@@ -93,7 +93,6 @@ Game.prototype.start = function () {
 
 Game.prototype.stop = function () {
   //show user their score
-
   var finalScore = document.getElementById("final-score");
   finalScore.innerHTML = this.score;
   $("#scoreboard").show();

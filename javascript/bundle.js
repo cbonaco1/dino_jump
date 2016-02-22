@@ -198,7 +198,6 @@
 	
 	Game.prototype.stop = function () {
 	  //show user their score
-	
 	  var finalScore = document.getElementById("final-score");
 	  finalScore.innerHTML = this.score;
 	  $("#scoreboard").show();
@@ -363,6 +362,13 @@
 	Obstacle.prototype.slide = function () {
 	  this.domElement.style.left = "0px";
 	  this.domElement.style.opacity = 1.0;
+	};
+	
+	Obstacle.prototype.inherits = function (BaseClass) {
+	  function Surrogate () {};
+	  Surrogate.prototype = BaseClass.prototype;
+	  this.prototype = new Surrogate();
+	  this.prototype.constructor = this;
 	};
 	
 	module.exports = Obstacle;

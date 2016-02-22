@@ -48,7 +48,6 @@ h2 {
   background-image: url('./../images/boulder-background.jpg');
   border-radius: 5px;
   transition: opacity 1000ms;
-  /*this might make the obstacle appear smoother*/
 }
 
 .jump {
@@ -133,5 +132,20 @@ h2 {
 .gold-coin {
   height: 50px;
   width: 50px;
+}
 
+.bird {
+  display: block;
+  border:1px solid red;
+  height: 90px;
+  width: 90px;
+  background-image: url('./../images/bird_sprite_sheet.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 380px 80px;
+  overflow: hidden;
+}
+
+.bird-down {
+  background-position: -100px 0;
 }
