@@ -191,7 +191,7 @@
 	  this.scoreInterval = window.setInterval(this.incrementScore.bind(this), 50);
 	  this.collisionInterval = window.setInterval(this.checkCollision.bind(this), 10);
 	  this.doubleScoreInterval = window.setInterval(this.doubleScore.bind(this), this.settings.doubleScoreInterval);
-	  this.slideBackgroundInterval = window.setInterval(this.slideBackground.bind(this, 0), 10);
+	  this.slideBackgroundInterval = window.setInterval(this.slideBackground.bind(this), 10);
 	
 	  this.init();
 	};

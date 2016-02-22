@@ -34,9 +34,10 @@ h2 {
   height: 100px;
   bottom: 22px;
   left: 200px;
-  /*Need height here?*/
-  transition: bottom 0.5s, height 0s;
-  -webkit-transition: bottom 0.5s, height 0s;
+  /*transition: bottom 0.5s, height 0s;
+  -webkit-transition: bottom 0.5s, height 0s;*/
+  transition: bottom 0.5s;
+  -webkit-transition: bottom 0.5s;
 }
 
 .obstacle {
