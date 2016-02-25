@@ -22,6 +22,22 @@ h2 {
   font-size: 24px;
 }
 
+.bird {
+  display: block;
+  border:1px solid red;
+  height: 90px;
+  width: 90px;
+  background-image: url('./../images/bird_sprite_sheet.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 380px 80px;
+  overflow: hidden;
+}
+
+.bird-down {
+  background-position: -100px 0;
+}
+
 #dino-img {
   width: 120%;
   height: auto;
@@ -132,20 +148,4 @@ h2 {
 .gold-coin {
   height: 50px;
   width: 50px;
-}
-
-.bird {
-  display: block;
-  border:1px solid red;
-  height: 90px;
-  width: 90px;
-  background-image: url('./../images/bird_sprite_sheet.png');
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: 380px 80px;
-  overflow: hidden;
-}
-
-.bird-down {
-  background-position: -100px 0;
 }

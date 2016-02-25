@@ -21,6 +21,7 @@ $(document).ready(function() {
   }
 
   document.addEventListener("keydown", function(e){
+    console.log(e.keyCode);
     if (e.keyCode === 40) {
       e.preventDefault();
       dino.duck();
@@ -36,6 +37,13 @@ $(document).ready(function() {
         dino.jump();
       }
       makeJump = false;
+    }
+
+    if (e.keyCode == 39) {
+      dino.slideRight();
+    }
+    if (e.keyCode == 37) {
+      dino.slideLeft();
     }
   });
 

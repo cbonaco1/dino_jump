@@ -9,6 +9,7 @@ Dino.prototype.setJumpHeight = function (height) {
 Dino.prototype.jump = function () {
   if (this.jumpHeight) {
     this.dino.style.bottom = this.jumpHeight;
+    //add class
   }
   else {
     //makes the dino jump before the game is set
@@ -30,6 +31,20 @@ Dino.prototype.duck = function () {
 Dino.prototype.rise = function () {
   // this.dino.style.height = "100px";
   $(this.dino).removeClass("duck");
+};
+
+Dino.prototype.slideRight = function () {
+  var dinoStyles = window.getComputedStyle(this.dino);
+  var currentLeft = dinoStyles.getPropertyValue('left');
+  var leftInt = parseInt(currentLeft.replace("px", "")) + 2;
+  this.dino.style.left = String(leftInt) + "px";
+};
+
+Dino.prototype.slideLeft = function () {
+  var dinoStyles = window.getComputedStyle(this.dino);
+  var currentLeft = dinoStyles.getPropertyValue('left');
+  var leftInt = parseInt(currentLeft.replace("px", "")) - 2;
+  this.dino.style.left = String(leftInt) + "px";
 };
 
 module.exports = Dino;
