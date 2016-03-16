@@ -142,7 +142,7 @@
 	      settings["interval"] = 1500;
 	      settings["speed"] = "left 1.5s";
 	      settings["jumpHeight"] = "150px";
-	      settings["minObstacleDimension"] = 50;
+	      settings["minObstacleDimension"] = 35;
 	      settings["maxObstacleDimension"] = 100;
 	      settings["doubleScoreInterval"] = 32000;
 	      break;
@@ -151,7 +151,7 @@
 	      settings["interval"] = 1000;
 	      settings["speed"] = "left 1.0s";
 	      settings["jumpHeight"] = "200px";
-	      settings["minObstacleDimension"] = 100;
+	      settings["minObstacleDimension"] = 80;
 	      settings["maxObstacleDimension"] = 140;
 	      settings["doubleScoreInterval"] = 17000;
 	      break;
@@ -228,10 +228,8 @@
 	  window.clearInterval(this.doubleScoreInterval);
 	  window.clearInterval(this.slideBackgroundInterval);
 	
-	
 	  this.started = false;
 	  this.score = 0;
-	  // this.obstacles = [];
 	};
 	
 	//Adds obstacle to Game's queue of obstalces
@@ -276,10 +274,13 @@
 	    scoreWindow.style.transform = "rotate(-360deg)";
 	  }, 3000);
 	
+	  // Half the interval at which the obstacles are made
+	  this.settings.interval = Math.floor(this.settings.interval / 2);
+	
 	};
 	
 	//keep sliding background to the left
-	//since the background is set to repeat-x, then this is okay
+	//since the background is set to repeat-x, this is okay
 	Game.prototype.slideBackground = function () {
 	  x -= 1;
 	  this.field.style.backgroundPosition = x + "px 0";
